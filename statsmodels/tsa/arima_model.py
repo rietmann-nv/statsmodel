@@ -646,7 +646,7 @@ class ARMA(tsbase.TimeSeriesModel):
             start = self._index[start]
 
         start, end, out_of_sample, prediction_index = (
-            super(ARMA, self)._get_prediction_index(start, end, index))
+            super()._get_prediction_index(start, end, index))
 
         # This replaces the _validate() call
         if 'mle' not in method and start < k_ar - k_diff:
@@ -1056,7 +1056,7 @@ class ARIMA(ARMA):
             end -= k_diff
 
         start, end, out_of_sample, prediction_index = (
-            super(ARIMA, self)._get_prediction_index(start, end, index))
+            super()._get_prediction_index(start, end, index))
 
         # From _get_predict_end
         if 'mle' not in self.method and not dynamic:
@@ -1177,7 +1177,7 @@ class ARIMA(ARMA):
         if typ == 'linear':
             if not dynamic or (start != self.k_ar + self.k_diff and
                                start is not None):
-                return super(ARIMA, self).predict(params, start, end, exog,
+                return super().predict(params, start, end, exog,
                                                   dynamic)
             else:
                 # need to assume pre-sample residuals are zero

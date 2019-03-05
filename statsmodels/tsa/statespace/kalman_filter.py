@@ -294,8 +294,8 @@ class KalmanFilter(Representation):
 
     def __init__(self, k_endog, k_states, k_posdef=None,
                  loglikelihood_burn=0, tolerance=1e-19, results_class=None,
-                 kalman_filter_classes=None, **kwargs):
-        super(KalmanFilter, self).__init__(
+                 kalman_filter_classes=None, **kwargs):        
+        super().__init__(
             k_endog, k_states, k_posdef, **kwargs
         )
 
