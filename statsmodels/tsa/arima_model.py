@@ -657,6 +657,13 @@ class ARMA(tsbase.TimeSeriesModel):
 
         return start, end, out_of_sample, prediction_index
 
+    def init_kalman_state(self, params):
+        params = np.asarray(params)
+        # returns (y, k, nobs, k_ar, k_ma, k_lags, newparams,
+        #          Z_mat, m, R_mat, T_mat, paramsdtype)
+        return KalmanFilter._init_kalman_state(params,
+                                               self)
+
     def geterrors(self, params):
         """
         Get the errors of the ARMA process.
@@ -1070,6 +1077,12 @@ class ARIMA(ARMA):
         _check_arima_start(start, k_ar, k_diff, method, dynamic)
 
         return start, end, out_of_sample, prediction_index
+
+    def init_kalman_state(self, params):
+        # returns (y, k, nobs, k_ar, k_ma, k_lags, newparams,
+        #          Z_mat, m, R_mat, T_mat, paramsdtype)
+        return super().init_kalman_state(params)
+        
 
     def fit(self, start_params=None, trend='c', method="css-mle",
             transparams=True, solver='lbfgs', maxiter=500, full_output=1,
