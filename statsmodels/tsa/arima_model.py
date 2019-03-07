@@ -430,7 +430,7 @@ class ARMA(tsbase.TimeSeriesModel):
 
     def __init__(self, endog, order, exog=None, dates=None, freq=None,
                  missing='none'):
-        super(ARMA, self).__init__(endog, exog, dates, freq, missing=missing)
+        super().__init__(endog, exog, dates, freq, missing=missing)
         exog = self.data.exog  # get it after it's gone through processing
         _check_estimable(len(self.endog), sum(order))
         self.k_ar = k_ar = order[0]
@@ -951,10 +951,10 @@ class ARMA(tsbase.TimeSeriesModel):
             kwargs.setdefault('factr', 1e2)
             kwargs.setdefault('m', 12)
             kwargs.setdefault('approx_grad', True)
-        mlefit = super(ARMA, self).fit(start_params, method=solver,
-                                       maxiter=maxiter,
-                                       full_output=full_output, disp=disp,
-                                       callback=callback, **kwargs)
+        mlefit = super().fit(start_params, method=solver,
+                             maxiter=maxiter,
+                             full_output=full_output, disp=disp,
+                             callback=callback, **kwargs)
         params = mlefit.params
 
         if transparams:  # transform parameters back
@@ -990,7 +990,7 @@ class ARIMA(ARMA):
         if d == 0:  # then we just use an ARMA model
             return ARMA(endog, (p, q), exog, dates, freq, missing)
         else:
-            mod = super(ARIMA, cls).__new__(cls)
+            mod = super().__new__(cls)
             mod.__init__(endog, order, exog, dates, freq, missing)
             return mod
 
@@ -1010,7 +1010,7 @@ class ARIMA(ARMA):
             #NOTE: to make more general, need to address the d == 2 stuff
             # in the predict method
             raise ValueError("d > 2 is not supported")
-        super(ARIMA, self).__init__(endog, (p, q), exog, dates, freq, missing)
+        super().__init__(endog, (p, q), exog, dates, freq, missing)
         self.k_diff = d
         self._first_unintegrate = unintegrate_levels(self.endog[:d], d)
         self.endog = np.diff(self.endog, n=d)
