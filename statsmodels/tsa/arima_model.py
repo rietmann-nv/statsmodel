@@ -1149,10 +1149,10 @@ class ARIMA(ARMA):
         r, order = 'F')
 
         """
-        mlefit = super(ARIMA, self).fit(start_params, trend,
-                                           method, transparams, solver,
-                                           maxiter, full_output, disp,
-                                           callback, start_ar_lags, **kwargs)
+        mlefit = super().fit(start_params, trend,
+                             method, transparams, solver,
+                             maxiter, full_output, disp,
+                             callback, start_ar_lags, **kwargs)
         normalized_cov_params = None  # TODO: fix this?
         arima_fit = ARIMAResults(self, mlefit._results.params,
                                  normalized_cov_params)
