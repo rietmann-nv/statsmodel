@@ -1197,7 +1197,7 @@ class ARIMA(ARMA):
                 # do this by a hack
                 q = self.k_ma
                 self.k_ma = 0
-                predictedvalues = super(ARIMA, self).predict(params, start,
+                predictedvalues = super().predict(params, start,
                                                              end, exog,
                                                              dynamic)
                 self.k_ma = q
